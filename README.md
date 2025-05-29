@@ -329,10 +329,6 @@ The application is configured to accept requests from `http://localhost:5173` (t
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 📞 Support
 
 For support and questions, please open an issue in the repository or contact the development team.
