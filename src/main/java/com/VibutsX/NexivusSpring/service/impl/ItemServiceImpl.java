@@ -9,8 +9,6 @@ import com.VibutsX.NexivusSpring.entity.ItemEntity;
 import com.VibutsX.NexivusSpring.repository.ItemRepository;
 import com.VibutsX.NexivusSpring.service.ItemService;
 
-
-
 @Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
@@ -18,7 +16,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemEntity createItem(ItemEntity entity) {
-       return itemRepository.save(entity);
+        return itemRepository.save(entity);
     }
 
     @Override
@@ -27,17 +25,22 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<ItemEntity> getAllByIds(List<Long> ids) {
+        return itemRepository.findAllById(ids);
+    }
+
+    @Override
     public ItemEntity getById(Long id) {
         return itemRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ItemEntity update(Long id,ItemEntity entity) {
+    public ItemEntity update(Long id, ItemEntity entity) {
         ItemEntity existingItem = getById(id);
 
-        if(existingItem == null){
+        if (existingItem == null) {
             return null;
-        } else{
+        } else {
             existingItem.setName(entity.getName());
             existingItem.setDescription(entity.getDescription());
             existingItem.setPrice(entity.getPrice());
@@ -51,5 +54,5 @@ public class ItemServiceImpl implements ItemService {
     public void delete(Long id) {
         itemRepository.deleteById(id);
     }
-    
+
 }

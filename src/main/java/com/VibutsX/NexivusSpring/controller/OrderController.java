@@ -3,6 +3,7 @@ package com.VibutsX.NexivusSpring.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,19 +37,23 @@ public class OrderController {
     public ResponseEntity<OrderEntity> create(@RequestBody OrderDto dto) {
 
         OrderEntity newOrder = new OrderEntity();
-        Double total = 0.0;
+        final Double[] total = { 0.0 };
         List<ItemEntity> orderItems = new ArrayList<ItemEntity>();
 
         for (Long id : dto.getItemIds()) {
             ItemEntity item = itemService.getById(id);
             if (item != null) {
                 orderItems.add(item);
-                total += item.getPrice();
+                total[0] += item.getPrice();
             }
         }
-
+        // List<ItemEntity> items = itemService.getAllByIds(dto.getItemIds());
+        // items.forEach(item -> {
+        // orderItems.add(item);
+        // total[0] += item.getPrice();
+        // });
         newOrder.setItems(orderItems);
-        newOrder.setOrderTotal(total);
+        newOrder.setOrderTotal(total[0]);
 
         OrderEntity createdOrder = orderService.create(newOrder);
 

@@ -5,9 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.VibutsX.NexivusSpring.entity.ItemEntity;
 
-
-
 @Repository
-public interface ItemRepository extends JpaRepository<ItemEntity,Long>{
-     
+public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
+
 }

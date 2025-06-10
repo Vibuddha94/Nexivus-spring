@@ -32,19 +32,14 @@ public class OrderEntity {
     private Double orderTotal;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         if (this.orderDateTime == null) {
             this.orderDateTime = LocalDateTime.now();
         }
     }
 
     @ManyToMany
-    @JoinTable(
-        name = "order_Item",
-        joinColumns = @JoinColumn(name = "order_Id" ,referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "item_Id" , referencedColumnName = "id")
-    )
+    @JoinTable(name = "order_Item", joinColumns = @JoinColumn(name = "order_Id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "item_Id", referencedColumnName = "id"))
     private List<ItemEntity> items;
 
-    
 }
